@@ -2,6 +2,27 @@
  * merry christmas
 */
 $(function(){
+	var path=ISPRO ? "dist" : "src",//静态资源启用路径
+		bannerUrl=path+"/images/banner.png";//默认的banner背景图
+
+	//获取查询字符串
+	var search=location.search.length ? location.search.substr(1) : "",
+		searchArr=search.length ? search.split("&") : [],
+		searchData={};
+
+	for(var i=0;i<searchArr.length;i++){
+		var tmp=searchArr[i].split("=");
+		searchData[tmp[0]]=tmp[1];
+	}
+
+	//动态替换banner的路径
+	if(searchData.tg){
+		bannerUrl=path+"/images/banner_"+searchData.tg+".png";
+	}
+
+	//更改dom中的背景图片
+	$(".j-banner").css("backgroundImage","url("+bannerUrl+")");
+
 	var animates={},//动画集合
 		animateEvents="webkitAnimationEnd mozAnimationEnd MSAnimationEnd oAnimationend Animationend",
 		transitionEvents="webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionend Transitionend";
@@ -77,8 +98,7 @@ $(function(){
 
 	//资源预加载
 	var preload={},
-		$loading=$(".loading-mask"),
-		path=ISPRO ? "dist" : "src";
+		$loading=$(".loading-mask");
 
 	//图片集合
 	preload.imgs=[
@@ -90,8 +110,9 @@ $(function(){
 		path+'/images/bag.png',
 		path+'/images/sprite_gifts.png',
 		path+'/images/glove.png',
-		path+'/images/banner.png'
+		bannerUrl
 	];
+
 	preload.loadedPer=0;//已经加载的百分比
 	preload.eachItemPer=100/preload.imgs.length;//每个加载项的百分比
 	//加载图片
