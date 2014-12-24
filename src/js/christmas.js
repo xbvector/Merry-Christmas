@@ -3,7 +3,8 @@
 */
 $(function(){
 	var path=ISPRO ? "dist" : "src",//静态资源启用路径
-		bannerUrl=path+"/images/banner.png";//默认的banner背景图
+		bannerUrl=path+"/images/banner.png",//默认的banner背景图
+		audioUrl="audio/main.mp3";
 
 	//获取查询字符串
 	var search=location.search.length ? location.search.substr(1) : "",
@@ -18,10 +19,12 @@ $(function(){
 	//动态替换banner的路径
 	if(searchData.tg){
 		bannerUrl=path+"/images/banner_"+searchData.tg+".png";
+		audioUrl="audio/main_"+searchData.tg+".mp3";
 	}
 
 	//更改dom中的背景图片
 	$(".j-banner").css("backgroundImage","url("+bannerUrl+")");
+	$("#bgmusci").attr("src",audioUrl);
 
 	var animates={},//动画集合
 		animateEvents="webkitAnimationEnd mozAnimationEnd MSAnimationEnd oAnimationend Animationend",
