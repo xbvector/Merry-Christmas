@@ -90,7 +90,7 @@ $(function(){
 		path+'/images/bag.png',
 		path+'/images/sprite_gifts.png',
 		path+'/images/glove.png',
-		path+'/images/banner.png'
+		path+'/images/banner_lixue.png'
 	];
 	preload.loadedPer=0;//已经加载的百分比
 	preload.eachItemPer=100/preload.imgs.length;//每个加载项的百分比
